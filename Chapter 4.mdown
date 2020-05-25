@@ -67,7 +67,7 @@ Adam optimizer is used to power the learning rates method to find individual lea
 The purpose of activation function is to add some kind of non-linearity property to the function which is a neural network. Without activation functions, the neural network could perform only linear mappings from i/p to o/y.
 Means output value doesnt increase by the same amount for every increment in input.
 
-####### Parameters
+###### Parameters
 The size of a network depends upon how much memory it takes up, depends mostly on its number of parameters, meaning its total number of weights and biases. This
 can be a useful metric when discussing model size and complexity
 
