@@ -8,7 +8,9 @@ Tensorflow model is set of instructions that tells an interpreter how to transfo
 **Flow of application**
 -Importing Dependencies : 
 
-
+<img src="dependencies.png"
+     alt="Markdown Monster icon"
+     style="float: left; margin-right: 10px;" />
 
 
 -Generating Data:  generate no of  sample datapoints
