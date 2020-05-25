@@ -1,15 +1,15 @@
 The sine function is used in trigonometry to help describe the properties of right-angled triangles. The data we’ll be training with is a sine 
 wave, which is the graph obtained by plotting the result of the sine function. Our goal is to train a model that can take a value, x, and predict its sine, y. 
 
-**Tensorflow**
-It is a set of tools for building, training, evaluating, and deploying machine learning models.It is developed at Google Airnub, Intel , twitter uses tensorflow. It is open source platform for ML>
+**Tensorflow** : 
+- It is a set of tools for building, training, evaluating, and deploying machine learning models.It is developed at Google Airnub, Intel , twitter uses tensorflow. It is open source platform for ML>
 Tensorflow model is set of instructions that tells an interpreter how to transform data in order to produce output
 
 **Flow of application** :
 1. **Importing Dependencies** : 
 
 <img src="dependencies.png"
-     alt="Importind Dependencies"
+     alt="Importing Dependencies"
      style="float: left; margin-right: 10px;" />
 
 - Installs the TensorFlow 2.0 library using pip, a package manager for Python
@@ -17,39 +17,181 @@ Tensorflow model is set of instructions that tells an interpreter how to transfo
 - We use import numpy as np to import NumPy and give it the alias np
 
 
--Generating Data:  generate no of  sample datapoints
-					Set a "seed" value, so we get the same random numbers each time we run this
-					Generate a uniformly distributed set of random numbers 
-					shuffle the values
-					We will add some noise to make predictions even when trained on messy, real-world data
-- Add some random noise to datapoints
-Splitting the data : To split our data, we use another handy NumPy method: split(). This method takes an array of data and an array of indices and then chops the data into parts at the indices provided.
- 					reserve 20% data for validation, and another 20% for testing.
-					use the remaining 60% to train the model
-					
-- Defining model : Build a model that will take an input value (in this case, x) and use it to predict a numeric output value (the sine of x). This type of problem is called a
-regression
-Creating  a Sequential model using Keras, which means a model in which each layer of neurons is stacked on top of the next
+2. **Generating Data** :  
+- Generating the many sample datapoints
+- Set a "seed" value, so we get the same random numbers each time 
+- Generate a uniformly distributed set of random numbers using np.random.uniform() function in the range from 0 to 2π 
+- Calculate the corresponding sine values
 
-# Optimizer
+<img src="generated_data.png"
+     alt="generated data"
+     style="float: left; margin-right: 10px;" />
+	 
+- Add a small random number to each y value
+
+<img src="noise.png"
+     alt="data with noise added"
+     style="float: left; margin-right: 10px;" />
+	 
+3. **Splitting the data** : 
+- To split data, we use  NumPy method: split(). 
+- This method takes an array of data and an array of indices and then chops the data into parts at the indices provided.
+ reserve 20% data for validation, and another 20% for testing and use the remaining 60% to train the model
+
+4. Defining a Basic Model
+			
+<img src="layers.png"
+     alt="Model Architecture"
+     style="float: left; margin-right: 10px;" />
+	 	
+- Build a model that will take an input value (in this case, x) and use it to predict a numeric output value (the sine of x). This type of problem is called a
+regression
+- Creating a Sequential model using Keras in which each layer of neurons is stacked on top of the next
+1. Dense layer : 
+- It has a single input x value and 16 neurons. It’s also known as a fully connected layer, means the input will be fed into every single
+ neurons during inference, when we’re making predictions. 
+- The amount of activation for each neuron is based on both its weight and bias values, learned during training, and its activation function. 
+
+Activation is calculated by a simple formula:
+activation = activation_function((input * weight) + bias)
+- In this network, we’re using an activation function called rectified linear unit, or ReLU.
+2. The activation numbers from our first layer will be fed as inputs to the second layer. This layer is a single neuron, it will receive 16 inputs, one for each of the neu‐
+rons in the previous layer. Its purpose is to combine all of the activations from the
+previous layer into a single output value.
+
+###### Optimizer
 It is algo or method used to chng the attributes of neural network such as weights and learning rate in order to reduce the losses. Optimizer help to get result faster.
 Adam optimizer is used to power the learning rates method to find individual learning rates for each parameter.
 
-# Activation function
+###### Activation function
 The purpose of activation function is to add some kind of non-linearity property to the function which is a neural network. Without activation functions, the neural network could perform only linear mappings from i/p to o/y.
 Means output value doesnt increase by the same amount for every increment in input.
 
-# Parameters
+####### Parameters
 The size of a network depends upon how much memory it takes up, depends mostly on its number of parameters, meaning its total number of weights and biases. This
 can be a useful metric when discussing model size and complexity
 
-# Converting the Model for TensorFlow Lite
-TensorFlow Lite Converter converts TensorFlow models into a format for use on memory-constrained devices, and it can apply optimizations that further reduce
-the model size and make it run faster on small devices.
-The most useful optimizations is quantization. By default, the weights and bises in a model are stored as 32-bit floating-point numbers so that high-precision calculations can occur during training. Quantization allows you to reduce the precision of these numbers so that they fit into 8-bit integers—a four times reduction in size.
-Even better, because it’s easier for a CPU to perform math with integers than with floats, a quantized model will run faster.
+5. Training Our Model:
 
-#Converting to a C File
+<img src="Training.png"
+     alt="Training model"
+     style="float: left; margin-right: 10px;" />
+	 
+- To train a model in Keras we just call its fit() method, passing all of our data and some other important arguments. The fit() function’s arguments:
+1. x_train, y_train : 
+- The first two arguments to fit() are the x and y values of our training data.
+2. epochs : 
+The next argument specifies how many times our entire training set will be run through the network during training. The more epochs, the more training will
+occur. We’re starting out with 1,000 epochs of training. 
+3. The batch_size :
+It specifies how many pieces of training data to feed into the network before measuring its accuracy and updating its weights and biases. If
+we wanted, we could specify a batch_size of 1, meaning we’d run inference on a single datapoint, measure the loss of the network’s prediction, update the weights
+and biases to make the prediction more accurate next time, and then continue this cycle for the rest of the data.
+4. validation_data :
+This is where we specify our validation dataset. Data from this dataset will be run through the network throughout the training process, and 
+the network’s predictions will be compared with the expected values. We’ll see the results of validation in the logs and as part of the history_1 object.
+
+7. Training Metrics
+
+<img src="metrices.png"
+     alt="Training_metrices"
+     style="float: left; margin-right: 10px;" />
+	 
+1. loss
+This is the output of our loss function. We’re using mean squared error, which is expressed as a positive number. Comparing the first and last epochs, the network has clearly improved during
+training, going from a loss of ~0.7 to a smaller value of ~0.15. 
+2. mae
+This is the mean absolute error of our training data. It shows the average difference between the network’s predictions and the expected y values from the train‐
+ing data.
+3. val_loss
+This is the output of our loss function on our validation data. In our final epoch,
+the training loss (~0.15) is slightly lower than the validation loss (~0.17). 
+The network might be overfitting.
+4. val_mae
+This is the mean absolute error for our validation data. 
+
+8. Graphing the History:
+
+<img src="tv_loss.png"
+     alt="graph of training and validation loss"
+     style="float: left; margin-right: 10px;" />
+
+- The loss continues to reduce until around 600 epochs, at which point it is mostly stable. This means that there’s probably no need to
+train network for so long.
+However, you can also see that the lowest loss value is still around 0.15. This seems relatively high. In addition, the validation loss values are consistently even higher.
+
+<img src="mae.png"
+     alt=" graph of mean absolute error during training and validation"
+     style="float: left; margin-right: 10px;" />
+	 
+- From the graph of mean absolute error we can see that on average, the training data shows lower error than the validation data, which means
+that the network might have overfit, or learned the training data so rigidly that it can’t make effective predictions about new data.
+- In addition, the mean absolute error values are quite high, around ~0.31, which means that some of the model’s predictions are wrong by at least 0.31. Since our
+expected values only range in size from –1 to +1, an error of 0.31 means we are very
+far from accurately modeling the sine wave.
+
+<img src="ta.png"
+     alt="graph of predicted versus actual values for  training data"
+     style="float: left; margin-right: 10px;" />
+
+- The graph makes it clear that our network has learned to approximate the sine function in a very limited way. The predictions are highly linear, and only very
+roughly fit the data.
+- The rigidity of this fit suggests that the model does not have enough capacity to learn the full complexity of the sine wave function, so it’s able to approximate it only in an
+overly simplistic way. By making our model bigger, we should be able to improve its performance
+
+9. Improving Model :
+-  Original model was too small to learn the complexity of our data, we can try to make it better.
+- To make the network bigger is to add another layer of neurons.
+- We will add another layer of 16 neurons in the middle and will again train the model 
+
+<img src="ip_tv.png"
+     alt="graph of predicted versus actual values for  training data"
+     style="float: left; margin-right: 10px;" />
+	 
+The metrics are broadly better for validation than training, which means the net‐
+work is not overfitting.
+
+	
+<img src="ip_mae.png"
+     alt="graph of mean absolute error during training and validation"
+     style="float: left; margin-right: 10px;" />
+	 
+The overall loss and mean absolute error are much better than in our previous
+network.
+
+10. Testing :
+- We set aside 20% of our data to use for testing.
+- We call the model’s evaluate() function method with the test data. This will calculate and print the loss and mean absolute error metrics,
+
+<img src="a_p.png"
+     alt="graph of predicted versus actual values for  training data"
+     style="float: left; margin-right: 10px;" />
+	 
+- The dots representing predicted values form a smooth curve along the center of the distribution of actual values. Our network has learned to 
+approximate a sine curve, even though the dataset was noisy!
+
+
+
+11. Converting the Model for TensorFlow Lite
+1. TensorFlow Lite Converter :
+This converts TensorFlow models into a special, space-efficient format for use on memory-constrained devices, and it can apply optimizations that further reduce
+the model size and make it run faster on small devices.
+2. TensorFlow Lite Interpreter :
+This runs an appropriately converted TensorFlow Lite model using the most efficient operations for a given device.
+
+- Before we use  model with TensorFlow Lite, we need to convert it using the TensorFlow Lite Converter’s Python API. It takes  Keras model and
+writes it to disk in the form of a FlatBuffer, which is a special file format designed to be space-efficient. 
+- To creating a FlatBuffer, the TensorFlow Lite Converter apply optimizations to the model. These optimizations generally reduce the size of the
+model. 
+- One of the most useful optimizations is quantization. By default, the weights and biases in a model are stored as 32-bit floating-point numbers 
+so that high-precision calculations can occur during training. Quantization allows you to reduce the precision of these numbers so that they fit 
+into 8-bit integers—a four times reduction in size.
+- Because it’s easier for a CPU to perform math with integers than with floats, a quantized model will run faster.
+- Quantization often results in minimal loss in accuracy. This means that when deploying to low-memory devices, it is nearly always worthwhile.
+
+12. Converting to a C File
+The final step in preparing  model for use with TensorFlow Lite for Microcontrollers is to convert it into a C source file that can be included in our application
+
 # Install xxd 
 !apt-get -qq install xxd
 # Save the file as a C source file
