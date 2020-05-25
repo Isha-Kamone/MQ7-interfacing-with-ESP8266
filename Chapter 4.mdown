@@ -81,14 +81,14 @@ can be a useful metric when discussing model size and complexity
 1. x_train, y_train : 
 - The first two arguments to fit() are the x and y values of our training data.
 2. epochs : 
-The next argument specifies how many times our entire training set will be run through the network during training. The more epochs, the more training will
+- The next argument specifies how many times our entire training set will be run through the network during training. The more epochs, the more training will
 occur. We’re starting out with 1,000 epochs of training. 
 3. The batch_size :
-It specifies how many pieces of training data to feed into the network before measuring its accuracy and updating its weights and biases. If
-we wanted, we could specify a batch_size of 1, meaning we’d run inference on a single datapoint, measure the loss of the network’s prediction, update the weights
+- It specifies how many pieces of training data to feed into the network before measuring its accuracy and updating its weights and biases. 
+- If we wanted, we could specify a batch_size of 1, meaning we’d run inference on a single datapoint, measure the loss of the network’s prediction, update the weights
 and biases to make the prediction more accurate next time, and then continue this cycle for the rest of the data.
 4. validation_data :
-This is where we specify our validation dataset. Data from this dataset will be run through the network throughout the training process, and 
+- This is where we specify our validation dataset. Data from this dataset will be run through the network throughout the training process, and 
 the network’s predictions will be compared with the expected values. We’ll see the results of validation in the logs and as part of the history_1 object.
 
 6. **Training Metrics**
@@ -97,18 +97,17 @@ the network’s predictions will be compared with the expected values. We’ll s
      alt="Training_metrices"
      style="float: left; margin-right: 10px;" />
 	 
-1. loss
-This is the output of our loss function. We’re using mean squared error, which is expressed as a positive number. Comparing the first and last epochs, the network has clearly improved during
+1. loss : 
+- This is the output of our loss function. We’re using mean squared error, which is expressed as a positive number. Comparing the first and last epochs, the network has clearly improved during
 training, going from a loss of ~0.7 to a smaller value of ~0.15. 
 2. mae
-This is the mean absolute error of our training data. It shows the average difference between the network’s predictions and the expected y values from the train‐
+- This is the mean absolute error of our training data. It shows the average difference between the network’s predictions and the expected y values from the train‐
 ing data.
 3. val_loss
-This is the output of our loss function on our validation data. In our final epoch,
-the training loss (~0.15) is slightly lower than the validation loss (~0.17). 
+- This is the output of our loss function on our validation data. In our final epoch, the training loss (~0.15) is slightly lower than the validation loss (~0.17). 
 The network might be overfitting.
 4. val_mae
-This is the mean absolute error for our validation data. 
+- This is the mean absolute error for our validation data. 
 
 7. **Graphing the History:**
 
@@ -173,10 +172,10 @@ approximate a sine curve, even though the dataset was noisy!
 
 
 10. **Converting the Model for TensorFlow Lite**
-1. TensorFlow Lite Converter :
+- TensorFlow Lite Converter :
 This converts TensorFlow models into a special, space-efficient format for use on memory-constrained devices, and it can apply optimizations that further reduce
 the model size and make it run faster on small devices.
-2. TensorFlow Lite Interpreter :
+- TensorFlow Lite Interpreter :
 This runs an appropriately converted TensorFlow Lite model using the most efficient operations for a given device.
 
 - Before we use  model with TensorFlow Lite, we need to convert it using the TensorFlow Lite Converter’s Python API. It takes  Keras model and
@@ -192,8 +191,13 @@ into 8-bit integers—a four times reduction in size.
 11. **Converting to a C File**
 The final step in preparing  model for use with TensorFlow Lite for Microcontrollers is to convert it into a C source file that can be included in our application
 
-# Install xxd 
+Install xxd 
 !apt-get -qq install xxd
-# Save the file as a C source file
+Save the file as a C source file
 !xxd -i sine_model_quantized.tflite > sine_model_quantized.cc
+
+<img src="c_array.png"
+     alt="graph of predicted versus actual values for  training data"
+     style="float: left; margin-right: 10px;" />
+
 
