@@ -17,17 +17,17 @@ Some architectures in the network excel at extracting meaning from image data, w
 ###### Deciding  on a Goal : 
 - When designing  algorithm, we need to decide what we want to predict so we can decide what data to collect and which
 model architecture to use.
-In factory machine example, we want to predict whether factory machine is about to break down. This as a classification problem in which machine
+- In factory machine example, we want to predict whether factory machine is about to break down. This as a classification problem in which machine
 learning task takes a set of input data and returns the probability that this data fits each of a set of known classes. In this example, we might have two classes: 
-“normal,” meaning that our machine is operating without issue, and 
-“abnormal,” meaning that our machine is showing signs that it might soon break down. 
+1. “normal,” meaning that our machine is operating without issue
+2. “abnormal,” meaning that our machine is showing signs that it might soon break down. 
 This means that our goal is to create a model that classifies our input data as either “normal” or “abnormal
 
 
 ###### Collecting a Dataset :
 - How much data is required to train a model is depends on factors like the complexity of the relationships between variables, the amount of noise.
 But the more data, the better! We should aim to collect data that represents the full range of conditions and events that can occur in the system. 
-If our machine can fail in several different ways, we should be sure to capture data around each type of failure. If a variable changes naturally over time, 
+- If our machine can fail in several different ways, we should be sure to capture data around each type of failure. If a variable changes naturally over time, 
 it’s important to collect data that represents the full range. For example, if the machine’s temperature rises on warm days, you should be sure to include
 data from both winter and summer. This  will help  model to represent every possible scenario.
 ######Labeling data :
@@ -38,39 +38,37 @@ with classes is called labeling, and the “normal” and “abnormal” classes
 - We also need to think about the constraints of the device we will be running the model on, because microcontrollers have limited memory and slow processors, and 
 larger models require more memory and take more time to run—the size of a model depends on the number of neurons it contains, and the way those neurons
 are connected. 
-We might start by training a simple model with a few layers of neurons and then refining the architecture in an iterative process until we get a useful result.
+- We might start by training a simple model with a few layers of neurons and then refining the architecture in an iterative process until we get a useful result.
 
-Deep learning models accept input and generate output in the form of tensors. 
-a tensor is essentially a list of numbers
-or other tensors, similar to array
-
+Deep learning models accept input and generate output in the form of tensors. A tensor is essentially a list of numbers or other tensors, similar to array
 The structure of a tensor is known as its shape, and they come in multiple dimensions.
 
-**Vector**
+**Vector** : 
 A vector is a list of numbers, similar to an array. It’s the name we give a tensor
 with a single dimension . 
 
-**Matrix**
+**Matrix** : 
 A matrix is a 2D tensor, similar to a 2D array. The following matrix is of shape
 
-**Higher-dimensional tensors**
+**Higher-dimensional tensors** : 
 Any shape with more than two dimensions is just referred to as a tensor. Here’s a
 
-**Scalar**
+**Scalar** :
 A single number, known as a scalar, is technically a zero-dimensional tensor. For
 
 
 ###### Generating features from data :  
 - In machine learning, the term feature refers to a particular type of information on which a model is trained. 
 Different types of models are trained on different types of features.  For example, a model might accept a single scalar value as its input feature.
-But inputs can be much more complex than this. a model designed to process images might accept a multidimensional tensor of image data as its input, 
+- But inputs can be much more complex than this. a model designed to process images might accept a multidimensional tensor of image data as its input, 
 and a model designed to predict based on multiple features might accept a vector containing multiple scalar values, one for each feature.
 
 
 ###### Normalization
 - The data feed into a neural network will be in the form of tensors filled with floating-point values.  For the training algorithm to work effec‐
 tively, these floating-point values need to be similar in size to one another. It’s ideal if all values are expressed as numbers in the range of 0 to 1.
-when images are fed into a neural network. Computers often store images as matrices of 8-bit integers, whose values range from 0 to 255. To normalize
+when images are fed into a neural network. 
+- Computers often store images as matrices of 8-bit integers, whose values range from 0 to 255. To normalize
 these values so that they are all between 0 and 1, each 8-bit value is multiplied by 1/255.
 
 ###### Training the Model
