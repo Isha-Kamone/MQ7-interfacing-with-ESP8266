@@ -5,12 +5,15 @@ wave, which is the graph obtained by plotting the result of the sine function. O
 It is a set of tools for building, training, evaluating, and deploying machine learning models.It is developed at Google Airnub, Intel , twitter uses tensorflow. It is open source platform for ML>
 Tensorflow model is set of instructions that tells an interpreter how to transform data in order to produce output
 
-**Flow of application**
--Importing Dependencies : 
-
+**Flow of application** :
+1. Importing Dependencies : 
 <img src="dependencies.png"
-     alt="Markdown Monster icon"
+     alt="Importind Dependencies"
      style="float: left; margin-right: 10px;" />
+
+- Installs the TensorFlow 2.0 library using pip, a package manager for Python
+- Imports TensorFlow, NumPy, Matplotlib, and Python’s math library
+- We use import numpy as np to import NumPy and give it the alias np
 
 
 -Generating Data:  generate no of  sample datapoints
