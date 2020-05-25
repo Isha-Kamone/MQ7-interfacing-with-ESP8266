@@ -7,6 +7,7 @@ Tensorflow model is set of instructions that tells an interpreter how to transfo
 
 **Flow of application** :
 1. Importing Dependencies : 
+
 <img src="dependencies.png"
      alt="Importind Dependencies"
      style="float: left; margin-right: 10px;" />
