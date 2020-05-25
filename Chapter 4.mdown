@@ -1,0 +1,51 @@
+The sine function is used in trigonometry to help describe the properties of right-angled triangles. The data we’ll be training with is a sine 
+wave, which is the graph obtained by plotting the result of the sine function. Our goal is to train a model that can take a value, x, and predict its sine, y. 
+
+**Tensorflow**
+It is a set of tools for building, training, evaluating, and deploying machine learning models.It is developed at Google Airnub, Intel , twitter uses tensorflow. It is open source platform for ML>
+Tensorflow model is set of instructions that tells an interpreter how to transform data in order to produce output
+
+**Flow of application**
+-Importing Dependencies : 
+
+
+
+
+-Generating Data:  generate no of  sample datapoints
+					Set a "seed" value, so we get the same random numbers each time we run this
+					Generate a uniformly distributed set of random numbers 
+					shuffle the values
+					We will add some noise to make predictions even when trained on messy, real-world data
+- Add some random noise to datapoints
+Splitting the data : To split our data, we use another handy NumPy method: split(). This method takes an array of data and an array of indices and then chops the data into parts at the indices provided.
+ 					reserve 20% data for validation, and another 20% for testing.
+					use the remaining 60% to train the model
+					
+- Defining model : Build a model that will take an input value (in this case, x) and use it to predict a numeric output value (the sine of x). This type of problem is called a
+regression
+Creating  a Sequential model using Keras, which means a model in which each layer of neurons is stacked on top of the next
+
+# Optimizer
+It is algo or method used to chng the attributes of neural network such as weights and learning rate in order to reduce the losses. Optimizer help to get result faster.
+Adam optimizer is used to power the learning rates method to find individual learning rates for each parameter.
+
+# Activation function
+The purpose of activation function is to add some kind of non-linearity property to the function which is a neural network. Without activation functions, the neural network could perform only linear mappings from i/p to o/y.
+Means output value doesnt increase by the same amount for every increment in input.
+
+# Parameters
+The size of a network depends upon how much memory it takes up, depends mostly on its number of parameters, meaning its total number of weights and biases. This
+can be a useful metric when discussing model size and complexity
+
+# Converting the Model for TensorFlow Lite
+TensorFlow Lite Converter converts TensorFlow models into a format for use on memory-constrained devices, and it can apply optimizations that further reduce
+the model size and make it run faster on small devices.
+The most useful optimizations is quantization. By default, the weights and bises in a model are stored as 32-bit floating-point numbers so that high-precision calculations can occur during training. Quantization allows you to reduce the precision of these numbers so that they fit into 8-bit integers—a four times reduction in size.
+Even better, because it’s easier for a CPU to perform math with integers than with floats, a quantized model will run faster.
+
+#Converting to a C File
+# Install xxd 
+!apt-get -qq install xxd
+# Save the file as a C source file
+!xxd -i sine_model_quantized.tflite > sine_model_quantized.cc
+
