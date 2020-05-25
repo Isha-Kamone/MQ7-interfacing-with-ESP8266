@@ -6,7 +6,7 @@ It is a set of tools for building, training, evaluating, and deploying machine l
 Tensorflow model is set of instructions that tells an interpreter how to transform data in order to produce output
 
 **Flow of application** :
-1. Importing Dependencies : 
+1. **Importing Dependencies** : 
 
 <img src="dependencies.png"
      alt="Importind Dependencies"
