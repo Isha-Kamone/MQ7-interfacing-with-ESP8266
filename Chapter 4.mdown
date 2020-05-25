@@ -38,7 +38,7 @@ Tensorflow model is set of instructions that tells an interpreter how to transfo
 - This method takes an array of data and an array of indices and then chops the data into parts at the indices provided.
  reserve 20% data for validation, and another 20% for testing and use the remaining 60% to train the model
 
-4. Defining a Basic Model
+4. **Defining a Basic Model**
 			
 <img src="layers.png"
      alt="Model Architecture"
@@ -71,7 +71,7 @@ Means output value doesnt increase by the same amount for every increment in inp
 The size of a network depends upon how much memory it takes up, depends mostly on its number of parameters, meaning its total number of weights and biases. This
 can be a useful metric when discussing model size and complexity
 
-5. Training Our Model:
+5. **Training Our Model:**
 
 <img src="Training.png"
      alt="Training model"
@@ -91,7 +91,7 @@ and biases to make the prediction more accurate next time, and then continue thi
 This is where we specify our validation dataset. Data from this dataset will be run through the network throughout the training process, and 
 the network’s predictions will be compared with the expected values. We’ll see the results of validation in the logs and as part of the history_1 object.
 
-7. Training Metrics
+6. **Training Metrics**
 
 <img src="metrices.png"
      alt="Training_metrices"
@@ -110,7 +110,7 @@ The network might be overfitting.
 4. val_mae
 This is the mean absolute error for our validation data. 
 
-8. Graphing the History:
+7. **Graphing the History:**
 
 <img src="tv_loss.png"
      alt="graph of training and validation loss"
@@ -139,7 +139,7 @@ roughly fit the data.
 - The rigidity of this fit suggests that the model does not have enough capacity to learn the full complexity of the sine wave function, so it’s able to approximate it only in an
 overly simplistic way. By making our model bigger, we should be able to improve its performance
 
-9. Improving Model :
+8. **Improving Model :**
 -  Original model was too small to learn the complexity of our data, we can try to make it better.
 - To make the network bigger is to add another layer of neurons.
 - We will add another layer of 16 neurons in the middle and will again train the model 
@@ -159,7 +159,7 @@ work is not overfitting.
 The overall loss and mean absolute error are much better than in our previous
 network.
 
-10. Testing :
+9. **Testing :**
 - We set aside 20% of our data to use for testing.
 - We call the model’s evaluate() function method with the test data. This will calculate and print the loss and mean absolute error metrics,
 
@@ -172,7 +172,7 @@ approximate a sine curve, even though the dataset was noisy!
 
 
 
-11. Converting the Model for TensorFlow Lite
+10. **Converting the Model for TensorFlow Lite**
 1. TensorFlow Lite Converter :
 This converts TensorFlow models into a special, space-efficient format for use on memory-constrained devices, and it can apply optimizations that further reduce
 the model size and make it run faster on small devices.
@@ -189,7 +189,7 @@ into 8-bit integers—a four times reduction in size.
 - Because it’s easier for a CPU to perform math with integers than with floats, a quantized model will run faster.
 - Quantization often results in minimal loss in accuracy. This means that when deploying to low-memory devices, it is nearly always worthwhile.
 
-12. Converting to a C File
+11. **Converting to a C File**
 The final step in preparing  model for use with TensorFlow Lite for Microcontrollers is to convert it into a C source file that can be included in our application
 
 # Install xxd 
