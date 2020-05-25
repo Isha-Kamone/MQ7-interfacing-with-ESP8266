@@ -191,11 +191,6 @@ into 8-bit integers—a four times reduction in size.
 11. **Converting to a C File**
 The final step in preparing  model for use with TensorFlow Lite for Microcontrollers is to convert it into a C source file that can be included in our application
 
-Install xxd 
-!apt-get -qq install xxd
-Save the file as a C source file
-!xxd -i sine_model_quantized.tflite > sine_model_quantized.cc
-
 <img src="c_array.png"
      alt="graph of predicted versus actual values for  training data"
      style="float: left; margin-right: 10px;" />
